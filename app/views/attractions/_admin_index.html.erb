@@ -1,0 +1,7 @@
+<% attractions.each do |a| %>
+  <p><strong>Name: </strong><%= a.name %></p>
+  <p><strong>Tickets: </strong><%= a.tickets %></p>
+  <p><%= link_to "Show #{a.name}", attraction_path(a) %></p>
+<% end %>
+
+<%= link_to "New Attraction", new_attraction_path %>

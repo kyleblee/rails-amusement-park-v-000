@@ -1,3 +1,32 @@
 class Ride < ActiveRecord::Base
-  # write associations here
+  belongs_to :attraction
+  belongs_to :user
+
+  def take_ride
+    if too_poor_and_short
+      "Sorry. You do not have enough tickets to ride the #{self.attraction.name}. You are not tall enough to ride the #{self.attraction.name}."
+    elsif too_poor
+      "Sorry. You do not have enough tickets to ride the #{self.attraction.name}."
+    elsif too_short
+      "Sorry. You are not tall enough to ride the #{self.attraction.name}."
+    else
+      self.user.tickets -= self.attraction.tickets
+      self.user.nausea += self.attraction.nausea_rating
+      self.user.happiness += self.attraction.happiness_rating
+      self.user.save
+      "Thanks for riding the #{self.attraction.name}!"
+    end
+  end
+
+  def too_poor_and_short
+     too_poor && too_short
+  end
+
+  def too_poor
+    self.user.tickets < self.attraction.tickets
+  end
+
+  def too_short
+    self.user.height < self.attraction.min_height
+  end
 end

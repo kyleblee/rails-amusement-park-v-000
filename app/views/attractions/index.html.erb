@@ -1,0 +1,4 @@
+<h1>Listing Attractions</h1>
+
+<%= render partial: "non_admin_index", locals: {attractions: @attractions} if !current_user.admin %>
+<%= render partial: "admin_index", locals: {attractions: @attractions} if current_user.admin %>

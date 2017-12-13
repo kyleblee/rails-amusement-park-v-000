@@ -24,6 +24,8 @@
         <div class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
            <!--  nav here -->
+           <%= render 'layouts/logged_out_nav' unless logged_in? %>
+           <%= render 'layouts/logged_in_nav' unless !logged_in? %>
           </ul>
         </div><!--/.nav-collapse -->
       </div>
@@ -31,6 +33,7 @@
 
     <!-- content -->
     <div class="container"  role="main">
+      <%= flash_messsages(flash) %>
       <%= yield %>
     </div>
 

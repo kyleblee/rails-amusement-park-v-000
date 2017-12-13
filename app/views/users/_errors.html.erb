@@ -1,0 +1,6 @@
+<% if !user.errors.empty? %>
+  <p><%= pluralize(user.errors.count, "error") %> prevented sign up. Please try again.</p>
+  <% user.errors.full_messages.each do |msg| %>
+    <li><%= msg %></li>
+  <% end %>
+<% end %>
